@@ -117,3 +117,21 @@ double compute_pi_avx_unroll(size_t N)
           tmp4[0] + tmp4[1] + tmp4[2] + tmp4[3];
     return pi * 4.0;
 }
+
+double leibniz_openmp(size_t N, int threads)
+{
+    double pi = 0.0;
+    double dt = 1.0;
+    #pragma omp parallel num_threads(threads)
+    {
+        #pragma omp for private(dt) reduction(+:pi)
+        for (size_t i = 0; i < N; ++i) {
+            if (i % 2)
+                dt = -1.0 - 2.0 * i;
+            else
+                dt = 1.0 + 2.0 * i;
+            pi += 1 / dt;
+        }
+    }
+    return pi * 4.0;
+}

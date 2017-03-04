@@ -13,3 +13,4 @@ plot "result_clock_gettime.csv" u 1:2  w lp title "Baseline",\
 "result_clock_gettime.csv" u 1:4 w lp title "OpenMP with 4 threads",\
  "result_clock_gettime.csv" u 1:5 w lp title "AVX SIMD" ,\
  "result_clock_gettime.csv" u 1:6 w lp  title "AVX SIMD + Loop unrolling" ,\
+ "result_clock_gettime.csv" u 1:7 w lp  title "Leibniz OpenMP with 4 threads" ,\

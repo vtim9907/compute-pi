@@ -104,6 +104,19 @@ int main(int argc, char const *argv[])
                          (end.tv_nsec - start.tv_nsec)/ONE_SEC;
     }
 
+    printf("%lf,", calc_ci(sample_time));
+
+    // Leibniz OpenMP
+    for (j = 0; j < SAMPLE_NUM; j++) {
+        clock_gettime(CLOCK_ID, &start);
+        for (i = 0; i < loop; i++) {
+            leibniz_openmp(N, 4);
+        }
+        clock_gettime(CLOCK_ID, &end);
+        sample_time[j] = (double) (end.tv_sec - start.tv_sec) +
+                         (end.tv_nsec - start.tv_nsec)/ONE_SEC;
+    }
+
     printf("%lf\n", calc_ci(sample_time));
 
     return 0;
